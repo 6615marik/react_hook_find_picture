@@ -1,11 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { Owerlay, Modall, Buttonn } from './Modal.styled';
 export const Modal = ({ onClose, img }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleClick);
+    return () => {
+      window.removeEventListener('keydown', handleClick);
+    };
   }, [handleClick]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   function handleClick(e) {
     if (e.currentTarget === e.target) {
       onClose();
